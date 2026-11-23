@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ImportKlar — EU-GPSR, HS/TARIC &amp; Frachtprüfer (100 % lokal)</title>
+  <meta name="description" content="EU-Produktsicherheitsverordnung (GPSR), HS/TARIC-Zoll-Pre-Flight &amp; Speditions-Surcharge-Audit im Browser." />
+  <link rel="canonical" href="https://cheresonanz-design.github.io/importklar-gpsr-customs/" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "ImportKlar EU-GPSR & Customs Pre-Flight", "applicationCategory": "BusinessApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "url": "https://cheresonanz-design.github.io/importklar-gpsr-customs/"}</script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand-mark" href="index.html"><span>ImportKlar</span><span class="brand-badge">GPSR · ZOLL · FREIGHT</span></a>
+      <nav class="nav-links" aria-label="Hauptnavigation"><a href="index.html" class="active">GPSR & Zoll Check</a>
+<a href="gpsr-check/" class="">EU-GPSR</a>
+<a href="hs-taric-audit/" class="">HS/TARIC</a>
+<a href="frachtrechnung-pruefen/" class="">Freight Audit</a>
+<a href="pro/" class="">Audit-Kit & Rollout</a>
+<a href="legal/" class="">Impressum</a><a href="pro/" class="nav-cta">39 EUR Kit</a></nav>
+    </div>
+  </header>
+  
+  <section class="hero"><div class="container"><h1>EU-GPSR, HS/TARIC &amp; Fracht-Pre-Flight-Checker</h1><p>Prüfen Sie Marktplatz-Listings nach VO (EU) 2023/988, 10-stellige TARIC-Nummern und Speditionszuschläge lokal im Browser.</p></div></section>
+  <main class="container">
+    <div class="card">
+      <div class="btn-row" style="margin-top:0;margin-bottom:14px;">
+        <button type="button" class="btn" id="sampleGapBtn">Demo: Drittland-Import mit GPSR-Lücken</button>
+        <button type="button" class="btn" id="sampleOkBtn">Demo: Konforme EU-SKU</button>
+        <button type="button" class="btn" id="sampleFrtBtn">Demo: Fracht-Surcharge-Alarm</button>
+      </div>
+      <div class="form-grid">
+        <div><label for="prodName">Produktname</label><input type="text" id="prodName" /></div>
+        <div><label for="skuInput">SKU</label><input type="text" id="skuInput" /></div>
+        <div><label for="gtinInput">GTIN / EAN / Charge</label><input type="text" id="gtinInput" /></div>
+        <div><label for="mfgName">Herstellername</label><input type="text" id="mfgName" /></div>
+        <div><label for="mfgContact">Hersteller-Anschrift / E-Mail</label><input type="text" id="mfgContact" /></div>
+        <div><label for="mfgCountry">Herstellungsland (ISO-2)</label><input type="text" id="mfgCountry" /></div>
+        <div><label for="euRpName">EU-Verantwortlicher (Art. 16)</label><input type="text" id="euRpName" /></div>
+        <div><label for="euRpContact">EU-RP Adresse / E-Mail</label><input type="text" id="euRpContact" /></div>
+        <div><label for="hsCodeInput">CN8 / TARIC10 Code</label><input type="text" id="hsCodeInput" /></div>
+        <div><label for="incotermSelect">Incoterm 2020</label>
+          <select id="incotermSelect"><option value="DDP">DDP</option><option value="DAP">DAP</option><option value="CIF">CIF</option><option value="FOB">FOB</option><option value="EXW">EXW</option><option value="FCA">FCA</option></select>
+        </div>
+        <div><label for="goodsEur">Warenwert (EUR)</label><input type="number" id="goodsEur" /></div>
+        <div><label for="freightEur">Basisfracht (EUR)</label><input type="number" id="freightEur" /></div>
+        <div><label for="surchargeEur">Nebenzuschläge BAF/CAF (EUR)</label><input type="number" id="surchargeEur" /></div>
+        <div><label for="insEur">Transportversicherung (EUR)</label><input type="number" id="insEur" /></div>
+      </div>
+      <div class="checks-grid">
+        <label class="check-item"><input type="checkbox" id="nonEuCheck" /> Hersteller außerhalb EU (Art. 16 Pflicht)</label>
+        <label class="check-item"><input type="checkbox" id="safetyCheck" /> Sicherheits-/Warnhinweise in Zielsprache DE/EU</label>
+        <label class="check-item"><input type="checkbox" id="ceReqCheck" /> CE-Kennzeichnungspflichtig</label>
+        <label class="check-item"><input type="checkbox" id="ceDocsCheck" /> CE-Konformitätserklärung &amp; Risikoanalyse fertig</label>
+      </div>
+      <div class="btn-row"><button type="button" class="btn btn-primary" id="runCheckBtn">Pre-Flight-Audit berechnen</button></div>
+    </div>
+
+    <div id="resultCard" class="card hidden">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;">
+        <h2 id="resultHeadline" style="margin:0;">Ergebnis</h2>
+        <div class="btn-row" style="margin:0;"><button type="button" class="btn" id="copyMdBtn">Markdown-Protokoll kopieren</button><button type="button" class="btn" id="dlJsonBtn">JSON-Audit laden</button></div>
+      </div>
+      <div class="kpi-grid">
+        <div class="kpi-box"><div class="kpi-label">Compliance Score</div><div class="kpi-val" id="scoreKpi">-</div></div>
+        <div class="kpi-box"><div class="kpi-label">Zollwert-Basis</div><div class="kpi-val" id="customsKpi">-</div></div>
+        <div class="kpi-box"><div class="kpi-label">Fracht-Zuschlagquote</div><div class="kpi-val" id="freightKpi">-</div></div>
+        <div class="kpi-box"><div class="kpi-label">TARIC / HS</div><div class="kpi-val" id="hsKpi">-</div></div>
+      </div>
+      <div class="table-wrap"><table><thead><tr><th>ID</th><th>Bereich</th><th>Status</th><th>Prüfpunkt</th></tr></thead><tbody id="checksBody"></tbody></table></div>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="offer-card highlight"><div><span class="badge badge-pass">IK-GPSR-01 · 39 EUR</span><h3>EU-GPSR &amp; Zoll Audit-Kit</h3><div class="offer-price">39 EUR</div><p class="muted">4-Tab Excel-Matrix (SKU-GPSR-Tracker, Zollwert, Surcharge-Audit, Marktplätze), Praxisguide PDF &amp; Offline-CLI.</p></div><div class="btn-row"><a href="mailto:che.resonanz@gmail.com?subject=Bestellung%20ImportKlar%20GPSR%20%26%20Zoll%20Audit-Kit%20%2839%20EUR%29" class="btn btn-primary">39 EUR Kit sichern</a><a href="pro/" class="btn">Details</a></div></div>
+      <div class="offer-card"><div><span class="badge badge-warn">IK-B2B-ROLLOUT · 2.500 EUR</span><h3>SKU-, Zoll- &amp; Freight-Rollout</h3><div class="offer-price">2.500 EUR</div><p class="muted">Audit für bis zu 50 SKUs, TARIC-Check &amp; Speditions-Surcharge-Analyse für 20 Frachtrechnungen.</p></div><div class="btn-row"><a href="mailto:che.resonanz@gmail.com?subject=Anfrage%20ImportKlar%20SKU%20%26%20Freight%20Rollout%20%282.500%20EUR%29" class="btn btn-dark">2.500 EUR Rollout anfragen</a><a href="pro/" class="btn">Umfang</a></div></div>
+    </div>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <p><strong>ImportKlar</strong> — EU-Produktsicherheitsverordnung (GPSR), HS/TARIC-Zoll-Pre-Flight &amp; Speditions-Surcharge-Audit im Browser.</p>
+      <p>Che Goncalves Menendez · ImportKlar · by VeriTakt Collective (Gewerbe: ImportKlar) · Liegnitzstr. 53A, 28237 Bremen, Deutschland · Umsatzsteuerbefreit gemäß § 19 UStG (Kleinunternehmerregelung)</p>
+      <p><a href="legal/">Impressum &amp; DSGVO</a> · <a href="pro/">39 EUR Kit &amp; 2.500 EUR Rollout</a> · <a href="https://cheresonanz-design.github.io/opskanon-directory/" target="_blank" rel="noopener">Gelistet auf OpsKanon</a></p>
+    </div>
+  </footer>
+  <script src="assets/importklar_engine.js"></script><script src="assets/app.js"></script>
+</body>
+</html>
