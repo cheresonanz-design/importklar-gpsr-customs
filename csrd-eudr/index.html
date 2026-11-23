@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ImportKlar ESG — VSME-CO2-Rechner &amp; EUDR Due-Diligence-Check (100 % lokal)</title>
+  <meta name="description" content="VSME-Nachhaltigkeitsdaten für KMU, Scope-1/2/3-CO2e-Faktoren &amp; EUDR-Entwaldungsprüfung ohne Berater-Overhead." />
+  <link rel="canonical" href="https://cheresonanz-design.github.io/importklar-gpsr-customs/csrd-eudr/" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "ImportKlar ESG", "applicationCategory": "BusinessApplication", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "url": "https://cheresonanz-design.github.io/importklar-gpsr-customs/csrd-eudr/"}</script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand-mark" href="index.html"><span>ImportKlar ESG</span><span class="brand-badge">VSME · SCOPE 3 · EUDR</span></a>
+      <nav class="nav-links" aria-label="Hauptnavigation"><a href="index.html" class="active">ESG &amp; EUDR Check</a>
+<a href="vsme-co2-rechner/" class="">VSME Rechner</a>
+<a href="eudr-due-diligence/" class="">EUDR Check</a>
+<a href="bank-esg-export/" class="">Bank Export</a>
+<a href="pro/" class="">Kit &amp; Rollout</a>
+<a href="legal/" class="">Impressum</a><a href="pro/" class="nav-cta">49 EUR Kit</a></nav>
+    </div>
+  </header>
+  
+  <section class="hero"><div class="container"><h1>CSRD / VSME &amp; EUDR Lieferketten-Prüfer (100 % lokal)</h1><p>Beantworten Sie ESG-Bankabfragen und Konzern-Lieferantenbögen in Minuten: VSME-Basismodule, Scope-3-Schätzung &amp; EUDR-Rohstoffprüfung.</p></div></section>
+  <main class="container">
+    <div class="card">
+      <div class="btn-row" style="margin-top:0;margin-bottom:14px;">
+        <button type="button" class="btn" id="sample1Btn">Demo: Möbel/Holz-Importeur (EUDR Lücken)</button>
+        <button type="button" class="btn" id="sample2Btn">Demo: Maschinenbau VSME (Vollständig)</button>
+        <button type="button" class="btn" id="sample3Btn">Demo: Kaffee/Kakao-Handel</button>
+      </div>
+      <div class="form-grid">
+        <div><label for="profileInput">Unternehmen / Produktlinie</label><input type="text" id="profileInput" /></div>
+        <div><label for="modeSelect">Standard</label><select id="modeSelect"><option value="vsme_eudr">VSME + EUDR Kombicheck</option><option value="vsme">EFRAG VSME Basismodul</option><option value="eudr">EU-Entwaldungsverordnung (EUDR)</option></select></div>
+        <div><label for="toneSelect">Ausgabeformat</label><select id="toneSelect"><option value="executive">Bank-/Konzern-Antwortbogen</option><option value="streng">Lieferanten-Nachforderung (Geodaten)</option></select></div>
+      </div>
+      <div class="btn-row"><button type="button" class="btn btn-primary" id="runCheckBtn">ESG &amp; EUDR prüfen</button></div>
+    </div>
+
+    <div id="resultCard" class="card hidden">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;">
+        <h2 id="resultHeadline" style="margin:0;">Ergebnis</h2>
+        <div class="btn-row" style="margin:0;">
+          <button type="button" class="btn btn-primary" id="copyActionBtn">Maßnahmentext kopieren</button>
+          <button type="button" class="btn" id="dlCsvBtn">CSV Export (.csv)</button>
+          <button type="button" class="btn" id="dlJsonBtn">JSON Audit (.json)</button>
+        </div>
+      </div>
+      <div class="kpi-grid">
+        <div class="kpi-box"><div class="kpi-label">ESG-Readiness</div><div class="kpi-val" id="kpi1Val">-</div></div>
+        <div class="kpi-box"><div class="kpi-label">Offene Nachweise</div><div class="kpi-val" id="kpi2Val">-</div></div>
+        <div class="kpi-box"><div class="kpi-label">Risiko / Bußgeld-Exposure</div><div class="kpi-val" id="kpi3Val">-</div></div>
+        <div class="kpi-box"><div class="kpi-label">Jahres-Impact / Ersparnis</div><div class="kpi-val" id="kpi4Val">-</div></div>
+      </div>
+      <div class="table-wrap"><table><thead><tr><th>ID</th><th>Position &amp; Kategorie</th><th>Kennzahl</th><th>Effekt</th><th>Status</th><th>Prüfhinweis</th></tr></thead><tbody id="entriesBody"></tbody></table></div>
+      <h3>VSME / EUDR Compliance-Antwortbogen</h3>
+      <textarea id="actionBox" readonly aria-label="Maßnahmentext"></textarea>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="offer-card highlight"><div><span class="badge badge-pass">IK-CSRD-01 · 49 EUR</span><h3>ImportKlar CSRD/VSME, Scope-3 &amp; EUDR Audit-Kit</h3><div class="offer-price">49 EUR</div><p class="muted">4-Tab VSME &amp; EUDR Excel-Matrix mit Emissionsfaktoren, Praxisguide PDF &amp; Offline Node.js CLI.</p></div><div class="btn-row"><a href="https://payhip.com/b/tTvz6" class="btn btn-primary">49 EUR Kit bestellen</a><a href="pro/" class="btn">Details</a></div></div>
+      <div class="offer-card"><div><span class="badge badge-warn">IK-CSRD-ROLLOUT · 2900 EUR</span><h3>ImportKlar CSRD/VSME &amp; EUDR Supply-Chain Rollout</h3><div class="offer-price">2900 EUR</div><p class="muted">Schlüsselfertiger VSME-Bericht plus EUDR-Lieferanten-Abfrage-Workflow für Ihre Top-30 HS-Artikel.</p></div><div class="btn-row"><a href="https://buy.stripe.com/bJe28k5cdfUy4vmbnr2400f" class="btn btn-dark">2900 EUR Rollout buchen</a><a href="pro/" class="btn">Umfang</a></div></div>
+    </div>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <p><strong>ImportKlar ESG</strong> — VSME-Nachhaltigkeitsdaten für KMU, Scope-1/2/3-CO2e-Faktoren &amp; EUDR-Entwaldungsprüfung ohne Berater-Overhead.</p>
+      <p>Che Goncalves Menendez · ImportKlar · by VeriTakt Collective (Gewerbe: ImportKlar) · Liegnitzstr. 53A, 28237 Bremen, Deutschland · Umsatzsteuerbefreit gemäß § 19 UStG (Kleinunternehmerregelung)</p>
+      <p><a href="legal/">Impressum &amp; DSGVO</a> · <a href="pro/">49 EUR Kit &amp; 2900 EUR Rollout</a> · <a href="https://cheresonanz-design.github.io/opskanon-directory/" target="_blank" rel="noopener">Gelistet auf OpsKanon</a></p>
+    </div>
+  </footer>
+  <script src="assets/csrd_eudr_engine.js"></script><script src="assets/app.js"></script>
+</body>
+</html>

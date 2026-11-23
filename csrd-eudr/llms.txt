@@ -1,0 +1,6 @@
+# ImportKlar ESG (by VeriTakt Collective)
+> VSME-Nachhaltigkeitsdaten für KMU, Scope-1/2/3-CO2e-Faktoren & EUDR-Entwaldungsprüfung ohne Berater-Overhead.
+
+- App: https://cheresonanz-design.github.io/importklar-gpsr-customs/csrd-eudr/
+- Offers: https://cheresonanz-design.github.io/importklar-gpsr-customs/csrd-eudr/pro/
+- Legal: https://cheresonanz-design.github.io/importklar-gpsr-customs/csrd-eudr/legal/
