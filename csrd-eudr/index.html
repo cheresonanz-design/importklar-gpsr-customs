@@ -35,61 +35,73 @@
         <div><label for="modeSelect">Standard</label><select id="modeSelect"><option value="vsme_eudr">VSME + EUDR Kombicheck</option><option value="vsme">EFRAG VSME Basismodul</option><option value="eudr">EU-Entwaldungsverordnung (EUDR)</option></select></div>
         <div><label for="toneSelect">Ausgabeformat</label><select id="toneSelect"><option value="executive">Bank-/Konzern-Antwortbogen</option><option value="streng">Lieferanten-Nachforderung (Geodaten)</option></select></div>
       </div>
+
       <div class="divider-top">
-        <div style="font-size:0.86rem;font-weight:700;margin-bottom:8px;">Eigene Position hinzufügen (100 % lokal im Browser)</div>
+        <div style="font-size:0.86rem;font-weight:700;margin-bottom:8px;">1. EFRAG VSME Energie- &amp; CO2e-Daten (Scope 1, 2 &amp; 3)</div>
         <div class="inline-grid">
-          <div><label for="posIdInput">Pos-ID</label><input type="text" id="posIdInput" placeholder="z. B. POS-04" /></div>
-          <div><label for="posLabelInput">Bezeichnung / Position</label><input type="text" id="posLabelInput" placeholder="Eigene Position eingeben..." /></div>
-          <div><label for="posCategoryInput">Kategorie</label><input type="text" id="posCategoryInput" placeholder="z. B. Prüfung / Risiko" /></div>
-          <div><label for="posMetricInput">Kennzahl</label><input type="number" id="posMetricInput" step="0.01" value="80" /></div>
-          <div><label for="posImpactInput">Effekt (EUR)</label><input type="number" id="posImpactInput" step="0.01" value="0" /></div>
-          <div><label for="posStatusSelect">Status</label><select id="posStatusSelect"><option value="AUTO">Automatik</option><option value="PASS">PASS</option><option value="WARN">WARN</option><option value="FAIL">FAIL</option></select></div>
-          <div><label for="posNoteInput">Prüfhinweis</label><input type="text" id="posNoteInput" placeholder="Kurzer Hinweis oder Maßnahme" /></div>
+          <div><label for="elecInput">Stromverbrauch (kWh/Jahr)</label><input type="number" id="elecInput" value="185000" min="0" /></div>
+          <div><label for="gasInput">Erdgas/Heizung (kWh/Jahr)</label><input type="number" id="gasInput" value="95000" min="0" /></div>
+          <div><label for="dieselInput">Fuhrpark Diesel (Liter/Jahr)</label><input type="number" id="dieselInput" value="14000" min="0" /></div>
+          <div><label for="scope3Input">Scope-3 Einkaufsvolumen (EUR)</label><input type="number" id="scope3Input" value="420000" min="0" /></div>
+          <div><label for="greenPowerCheck">Zertifizierter Ökostrom (Scope 2 = 0)?</label><input type="checkbox" id="greenPowerCheck" /></div>
+        </div>
+      </div>
+
+      <div class="divider-top">
+        <div style="font-size:0.86rem;font-weight:700;margin-bottom:8px;">2. EUDR Anhang-I HS-Rohstoff prüfen (Holz, Kaffee, Kakao, Kautschuk, Soja, Palmöl, Rind)</div>
+        <div class="inline-grid">
+          <div><label for="comSkuInput">SKU / Artikel-ID</label><input type="text" id="comSkuInput" placeholder="z. B. HLZ-4407" /></div>
+          <div><label for="comLabelInput">Rohstoff / Produkt</label><input type="text" id="comLabelInput" placeholder="z. B. Schnittholz Eiche" /></div>
+          <div><label for="comHsInput">HS / TARIC-Code</label><input type="text" id="comHsInput" placeholder="z. B. 440791" /></div>
+          <div><label for="comOriginInput">Ursprungsland (ISO-2)</label><input type="text" id="comOriginInput" value="BR" /></div>
+          <div><label for="comVolInput">Warenwert (EUR)</label><input type="number" id="comVolInput" value="25000" min="0" /></div>
+          <div><label for="comDdsInput">TRACES DDS Referenz</label><input type="text" id="comDdsInput" placeholder="optional" /></div>
+          <div><label for="comGeoCheck">GeoJSON-Polygon vorhanden?</label><input type="checkbox" id="comGeoCheck" /></div>
         </div>
         <div class="btn-row">
           <button type="button" class="btn btn-primary" id="runCheckBtn">ESG &amp; EUDR prüfen</button>
-          <button type="button" class="btn" id="addItemBtn">+ Position hinzufügen</button>
-          <button type="button" class="btn" id="clearItemsBtn">Positionen leeren</button>
+          <button type="button" class="btn" id="addCommodityBtn">+ HS-Position hinzufügen</button>
+          <button type="button" class="btn" id="clearItemsBtn">HS-Liste leeren</button>
         </div>
-        <details style="margin-top:12px;">
-          <summary style="cursor:pointer;font-size:0.86rem;font-weight:700;color:var(--slate-500);">CSV / Semikolon-Stapelimport &amp; Direktbearbeitung</summary>
-          <p class="muted" style="margin:6px 0 8px;">Format: <code>ID;Kategorie;Position;Kennzahl;Effekt_EUR;Status;Hinweis</code> (Semikolon oder Komma, lokal im Browser verarbeitet).</p>
-          <textarea id="batchCsvInput" aria-label="CSV Stapelimport"></textarea>
-          <div class="btn-row"><button type="button" class="btn" id="applyCsvBtn">CSV übernehmen &amp; prüfen</button></div>
-        </details>
       </div>
+
+      <details style="margin-top:12px;">
+        <summary style="cursor:pointer;font-size:0.86rem;font-weight:700;color:var(--slate-500);">EUDR-Rohstoffliste CSV-Stapelimport</summary>
+        <p class="muted" style="margin:6px 0 8px;">Format: <code>SKU;Bezeichnung;HS_Code;Ursprung;Warenwert_EUR;GeoJSON_OK;TRACES_DDS</code></p>
+        <textarea id="batchCsvInput" aria-label="CSV Stapelimport"></textarea>
+        <div class="btn-row"><button type="button" class="btn" id="applyCsvBtn">CSV übernehmen &amp; prüfen</button></div>
+      </details>
     </div>
 
     <div id="resultCard" class="card hidden">
       <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;">
         <h2 id="resultHeadline" style="margin:0;">Ergebnis</h2>
         <div class="btn-row" style="margin:0;">
-          <button type="button" class="btn btn-primary" id="copyActionBtn">Maßnahmentext kopieren</button>
+          <button type="button" class="btn btn-primary" id="copyActionBtn">Antwortbogen kopieren</button>
           <button type="button" class="btn" id="dlCsvBtn">CSV Export (.csv)</button>
           <button type="button" class="btn" id="dlJsonBtn">JSON Audit (.json)</button>
         </div>
       </div>
       <div class="kpi-grid">
         <div class="kpi-box"><div class="kpi-label">ESG-Readiness</div><div class="kpi-val" id="kpi1Val">-</div></div>
-        <div class="kpi-box"><div class="kpi-label">Offene Nachweise</div><div class="kpi-val" id="kpi2Val">-</div></div>
-        <div class="kpi-box"><div class="kpi-label">Risiko / Bußgeld-Exposure</div><div class="kpi-val" id="kpi3Val">-</div></div>
-        <div class="kpi-box"><div class="kpi-label">Jahres-Impact / Ersparnis</div><div class="kpi-val" id="kpi4Val">-</div></div>
+        <div class="kpi-box"><div class="kpi-label">CO2e gesamt (S1+2+3)</div><div class="kpi-val" id="kpi2Val">-</div></div>
+        <div class="kpi-box"><div class="kpi-label">EUDR Risiko-Volumen</div><div class="kpi-val" id="kpi3Val">-</div></div>
+        <div class="kpi-box"><div class="kpi-label">Offene Nachweise</div><div class="kpi-val" id="kpi4Val">-</div></div>
       </div>
-      <div class="table-wrap"><table><thead><tr><th>ID</th><th>Position &amp; Kategorie</th><th>Kennzahl</th><th>Effekt</th><th>Status</th><th>Prüfhinweis</th><th>Aktion</th></tr></thead><tbody id="entriesBody"></tbody></table></div>
+      <div class="table-wrap"><table><thead><tr><th>ID</th><th>Position &amp; Kategorie</th><th>CO2e / Wert</th><th>Risiko EUR</th><th>Status</th><th>Prüfhinweis</th><th>Aktion</th></tr></thead><tbody id="entriesBody"></tbody></table></div>
       <h3>VSME / EUDR Compliance-Antwortbogen</h3>
-      <textarea id="actionBox" readonly aria-label="Maßnahmentext"></textarea>
+      <textarea id="actionBox" readonly aria-label="ESG Antwortbogen"></textarea>
     </div>
 
     <div class="pricing-grid">
-      <div class="offer-card highlight"><div><span class="badge badge-pass">IK-CSRD-01 · 49 EUR</span><h3>ImportKlar CSRD/VSME, Scope-3 &amp; EUDR Audit-Kit</h3><div class="offer-price">49 EUR</div><p class="muted">4-Tab VSME &amp; EUDR Excel-Matrix mit Emissionsfaktoren, Praxisguide PDF &amp; Offline Node.js CLI.</p></div><div class="btn-row"><a href="https://payhip.com/b/tTvz6" class="btn btn-primary">49 EUR Kit bestellen</a><a href="pro/" class="btn">Details</a></div></div>
-      <div class="offer-card"><div><span class="badge badge-warn">IK-CSRD-ROLLOUT · 2900 EUR</span><h3>ImportKlar CSRD/VSME &amp; EUDR Supply-Chain Rollout</h3><div class="offer-price">2900 EUR</div><p class="muted">Schlüsselfertiger VSME-Bericht plus EUDR-Lieferanten-Abfrage-Workflow für Ihre Top-30 HS-Artikel.</p></div><div class="btn-row"><a href="https://buy.stripe.com/bJe28k5cdfUy4vmbnr2400f" class="btn btn-dark">2900 EUR Rollout buchen</a><a href="pro/" class="btn">Umfang</a></div></div>
+      <div class="offer-card highlight"><div><span class="badge badge-pass">IK-CSRD-01 · 49 EUR</span><h3>ImportKlar CSRD/VSME, Scope-3 &amp; EUDR Audit-Kit</h3><div class="offer-price">49 EUR</div><p class="muted">4-Tab VSME &amp; EUDR Excel-Matrix mit Emissionsfaktoren, Praxisguide PDF &amp; Offline Node.js CLI.</p></div><div class="btn-row"><a href="https://payhip.com/b/tTvz6" class="btn btn-primary" target="_blank" rel="noopener">49 EUR Kit bestellen</a><a href="pro/" class="btn">Details</a></div></div>
+      <div class="offer-card"><div><span class="badge badge-warn">IK-CSRD-ROLLOUT · 2900 EUR</span><h3>ImportKlar CSRD/VSME &amp; EUDR Supply-Chain Rollout</h3><div class="offer-price">2900 EUR</div><p class="muted">Schlüsselfertiger VSME-Bericht plus EUDR-Lieferanten-Abfrage-Workflow für Ihre Top-30 HS-Artikel.</p></div><div class="btn-row"><a href="https://buy.stripe.com/bJe28k5cdfUy4vmbnr2400f" class="btn btn-dark" target="_blank" rel="noopener">2900 EUR Rollout buchen</a><a href="pro/" class="btn">Umfang</a></div></div>
     </div>
   </main>
   <footer class="footer">
     <div class="container">
       <p><strong>ImportKlar ESG</strong> — VSME-Nachhaltigkeitsdaten für KMU, Scope-1/2/3-CO2e-Faktoren &amp; EUDR-Entwaldungsprüfung ohne Berater-Overhead.</p>
       <p>Che Goncalves Menendez · ImportKlar · by VeriTakt Collective (Gewerbe: ImportKlar) · Liegnitzstr. 53A, 28237 Bremen, Deutschland · Umsatzsteuerbefreit gemäß § 19 UStG (Kleinunternehmerregelung)</p>
-      <p>Hinweis: Orientierungshilfe mit Beispieldaten, keine Rechts-, Steuer-, Medizin- oder Versicherungsberatung und keine Garantie auf Richtigkeit. Bestellungen und Anfragen bearbeite ich persönlich per E-Mail.</p>
       <p><a href="legal/">Impressum &amp; DSGVO</a> · <a href="pro/">49 EUR Kit &amp; 2900 EUR Rollout</a> · <a href="https://cheresonanz-design.github.io/opskanon-directory/" target="_blank" rel="noopener">Gelistet auf OpsKanon</a></p>
     </div>
   </footer>
